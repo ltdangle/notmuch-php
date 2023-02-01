@@ -1,0 +1,12 @@
+parameters:
+	phpVersion: 80100
+	level: 5
+	paths:
+		- src
+		- config
+		- mail
+
+	ignoreErrors:
+	        - '#\$separator of function explode expects non-empty-string, string given.#'
+	        - '#Variable \$action might not be defined.#'
+	        - '#Argument of an invalid type Dangle\\Mailer\\Model\\EmailAccount supplied for foreach, only iterables are supported.#'

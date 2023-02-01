@@ -1,0 +1,31 @@
+{
+    "name": "dangle/mailer",
+    "autoload": {
+        "psr-4": {
+            "Dangle\\Mailer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yevgen Fedorov",
+            "email": "mailbox@z01d.net"
+        }
+    ],
+    "require": {
+        "symfony/console": "^6.0",
+        "zbateson/mail-mime-parser": "^2.2",
+        "doctrine/collections": "^1.8",
+        "symfony/mailer": "^6.0",
+        "symfony/event-dispatcher": "^6.0",
+        "symfony/process": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/config": "^6.0",
+        "spatie/regex": "^3.1",
+        "symfony/yaml": "^6.0"
+    },
+    "require-dev": {
+        "psy/psysh": "^0.11.8",
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.9"
+    }
+}

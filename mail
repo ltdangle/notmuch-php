@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Dangle\Mailer\App;
+use Dangle\Mailer\Events\ConsoleNotificationEvent;
+use Dangle\Mailer\Events\ConsoleNotificationEventListener;
+use Dangle\Mailer\Events\FilesystemChangedEvent;
+use Dangle\Mailer\Events\FilesystemChangedEventListener;
+use Symfony\Component;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+require __DIR__ . '/vendor/autoload.php';
+
+// convert warnings to errors https://www.php.net/manual/en/class.errorexception.php
+function exception_error_handler($severity, $message, $file, $line)
+{
+    if (!(error_reporting() & $severity)) {
+        // This error code is not included in error_reporting
+        return;
+    }
+    throw new ErrorException($message, 0, $severity, $file, $line);
+}
+set_error_handler("exception_error_handler");
+
+// set up container
+$container = new Component\DependencyInjection\ContainerBuilder();
+
+$phpFileLoader = new Component\DependencyInjection\Loader\PhpFileLoader(
+    $container,
+    new Component\Config\FileLocator(__DIR__ . '/config')
+);
+
+$phpFileLoader->load('services.php');
+
+$container->compile();
+
+// configure event listeners
+/** @var EventDispatcherInterface $dispatcher */
+$dispatcher = $container->get(EventDispatcherInterface::class);
+$dispatcher->addListener(FilesystemChangedEvent::NAME, $container->get(FilesystemChangedEventListener::class));
+$dispatcher->addListener(ConsoleNotificationEvent::NAME, $container->get(ConsoleNotificationEventListener::class));
+
+/** @var Component\Console\Application $app */
+$app = $container->get(App::class);
+$app->run();
