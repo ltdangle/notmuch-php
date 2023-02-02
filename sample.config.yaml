@@ -1,0 +1,30 @@
+# Email accounts
+acc1:
+  shortName: acc1
+  email: mail@acc1.net
+  inboxShellCommand: 'notmuch search --output=files --format=text folder:mail@acc1.net/INBOX | grep /INBOX'
+  deletedFolder: /tmp/trashmail 
+  dsn: 'smtp://mail@acc1.net:password@smtp.emailserver.com:465'
+
+acc2:
+  shortName: acc2
+  email: mail@acc2.net
+  inboxShellCommand: 'notmuch search --output=files --format=text folder:mail@acc2.net/INBOX | grep /INBOX'
+  deletedFolder: /tmp/trashmail 
+  dsn: 'smtp://mail@acc2.net:password@smtp.emailserver.com:465'
+    
+# 'Virtual' email folders
+inbox: # Collective inbox
+  shortName: inbox
+  inboxShellCommand: 'notmuch search --output=files --format=text tag:inbox | grep /INBOX'
+  virtual: true
+
+unread: # All unread email in collective inbox
+  shortName: unread
+  inboxShellCommand: 'notmuch search --output=files --format=text tag:inbox AND tag:unread | grep /INBOX'
+  virtual: true
+
+flagged: # All flagged (important) email
+  shortName: flagged
+  inboxShellCommand: 'notmuch search --output=files --format=text tag:flagged'
+  virtual: true
