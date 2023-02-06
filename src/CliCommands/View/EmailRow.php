@@ -27,13 +27,13 @@ class EmailRow
         return $this->email->from;
     }
 
-    public function getTo(): string
+    public function getDeliveredTo(): string
     {
-        if (strlen($this->email->to) > 20) {
-            return substr($this->email->to, 0, 20).'...';
+        if (strlen($this->email->deliveredTo) > 20) {
+            return substr($this->email->deliveredTo, 0, 20).'...';
         }
 
-        return $this->email->to;
+        return $this->email->deliveredTo;
     }
 
     public function getSubject(): string

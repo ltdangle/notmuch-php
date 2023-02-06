@@ -57,10 +57,9 @@ class ReplyMessageAction implements MessageActionInterface
         $fileName = 'reply-'.$fileNameArr[count($fileNameArr) - 1];
         $tmpFile = $this->tmpDir.DIRECTORY_SEPARATOR.$fileName;
 
-        // TODO: implement attachments
         $messageSent = $this->doCompose->doComposeMessage(
             $tmpFile,
-            $email->to,
+            $email->deliveredTo,
             $email->from,
             "Re: {$email->subject}",
             $emailAccount,

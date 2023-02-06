@@ -38,7 +38,7 @@ class TextMailViewer implements MailViewerInterface
     {
         return <<<EMAIL
 From: {$email->from}
-To: {$email->to}
+To: {$email->deliveredTo}
 Subject: {$email->subject}
 Date: {$email->date}
 ------------------------------------

@@ -39,7 +39,7 @@ class EmailPrinter
         $important = $r->isImportant() ? '!' : '';
         $replied = $r->isAnswered() ? 'R' : '';
         $table->addRow([
-            "<fg=#31BD25{$bg};options=$options>{$r->getTo()}</>",
+            "<fg=#31BD25{$bg};options=$options>{$r->getDeliveredTo()}</>",
             "<fg=#31BD25{$bg};options=$options>{$unread} {$important} {$replied}</>",
             "<fg=#C23820{$bg};options=$options>$counter</>",
             "<fg=#31BD25{$bg};options=$options>{$r->getSubject()}</>",
