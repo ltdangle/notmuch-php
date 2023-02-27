@@ -11,7 +11,7 @@ Already a light should go on: if your email is stored as message-per-file on rem
 
 A preferred way to download remote email is via [mbsync](https://isync.sourceforge.io/mbsync.html) created specifically for this purpose. Besides downloading, mbsync will all reflect all changes done to local files back to remote server. So if you delete an email message file locally mbsync will delete it on a remote machine as well.
 
-But wait, it gets better. Introducing [notmuch](https://notmuchmail.org/) a cli maildir search engine that will index your Maildir archive and allow you to query it and create an equivalent of 'virtual email folders', a killer feature for many advanced email clients. Now you can search your local Maildir storage for subject, sender, etc. 
+But wait, it gets better. Introducing [notmuch](https://notmuchmail.org/), a cli maildir search engine that will index your Maildir archive and allow you to query it and create an equivalent of 'virtual email folders', a killer feature for many advanced email clients. Now you can search your local Maildir storage for subject, sender, etc. 
 
 With all the heavy lifting done and your email files firmly under your control it should not be too hard to create a cli tool in a language of your choice (PHP!) that would view these raw email files. A [Symfony console](https://symfony.com/doc/current/components/console.html) application can be created to be used as a cli frontend that would display the messages found by notmuch. 
 

@@ -14,7 +14,7 @@ use Dangle\Mailer\Settings;
 class FilesystemEmailRepository implements EmailRepositoryInterface
 {
     private int $offset = 0;
-    private int $window = 20;
+    private int $window;
     private string $shellCommand = '';
     private ?string $stdin = null;
 
@@ -24,13 +24,14 @@ class FilesystemEmailRepository implements EmailRepositoryInterface
     private StdInInterface $stdInReader;
     private string $stdinAccAlias;
 
-    public function __construct(Settings $settings, EmailFileParser $parseEmailFile, ProcessInterface $process, StdInInterface $stdInReader, string $stdinAccAlias)
+    public function __construct(Settings $settings, EmailFileParser $parseEmailFile, ProcessInterface $process, StdInInterface $stdInReader, string $stdinAccAlias, int $window)
     {
         $this->settings = $settings;
         $this->parseEmailFile = $parseEmailFile;
         $this->process = $process;
         $this->stdInReader = $stdInReader;
         $this->stdinAccAlias = $stdinAccAlias;
+        $this->window = $window;
     }
 
     public function emails(string $accAlias): EmailCollection

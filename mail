@@ -7,6 +7,7 @@ use Dangle\Mailer\Events\ConsoleNotificationEventListener;
 use Dangle\Mailer\Events\FilesystemChangedEvent;
 use Dangle\Mailer\Events\FilesystemChangedEventListener;
 use Symfony\Component;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -21,6 +22,10 @@ function exception_error_handler($severity, $message, $file, $line)
     throw new ErrorException($message, 0, $severity, $file, $line);
 }
 set_error_handler("exception_error_handler");
+
+// load env variables
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
 
 // set up container
 $container = new Component\DependencyInjection\ContainerBuilder();

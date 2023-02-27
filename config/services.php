@@ -25,7 +25,6 @@ use Dangle\Mailer\Service\Console\ConsoleOutput;
 use Dangle\Mailer\Service\Console\ConsoleQuestionHelper;
 use Dangle\Mailer\Service\EmailTransport\EmailTransportInterface;
 use Dangle\Mailer\Service\EmailTransport\SymfonyEmailTransport;
-use Dangle\Mailer\Service\MessageService\MessageService;
 use Dangle\Mailer\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -82,11 +81,10 @@ return static function (ContainerConfigurator $configurator) {
     $services->set(ToggleFlagAction::class)->arg('$command', 'f');
     $services->set(ToggleSeenAction::class)->arg('$command', 's');
     $services->set(EmailPathAction::class)->arg('$command', 'path');
-    $services->set(FilesystemEmailRepository::class)->arg('$stdinAccAlias', 'stdin');
+    $services->set(FilesystemEmailRepository::class)->arg('$stdinAccAlias', 'stdin')->arg('$window', $_ENV["MESSAGE_WINDOW_SIZE"]);
 
     $services->alias(OutputInterface::class, ConsoleOutput::class);
     $services->alias(InputInterface::class, ConsoleInput::class);
-    $services->alias( QuestionHelper::class, ConsoleQuestionHelper::class);
+    $services->alias(QuestionHelper::class, ConsoleQuestionHelper::class);
     $services->alias(EmailRepositoryInterface::class, FilesystemEmailRepository::class);
-
 };
